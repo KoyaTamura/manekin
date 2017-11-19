@@ -25,6 +25,11 @@ public class liveSphereChromaKey : MonoBehaviour {
 		{
 			Debug.Log("no camera");
 		}
+
+		for(int i=0;i<devices.Length;i++){
+			Debug.Log (devices[i].name);
+		}
+
 	}
 	
 	// Update is called once per frame
