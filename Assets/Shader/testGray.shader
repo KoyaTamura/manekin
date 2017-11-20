@@ -4,8 +4,8 @@
 	{
 		_MainTex ("Texture", 2D) = "white" {}
 		_Color ("DetectionColor", Color) = (0, 0, 0, 1)
-		_Threshold ("Threshold", float) = 0
-        _Contrast("Contrast", Range(1, 20))=10
+		_Threshold ("Threshold", float) = 0.015
+        _Contrast("Contrast", Range(0, 20))=9.99
 	}
 	SubShader
 	{
@@ -67,12 +67,12 @@
 
 
                  //クロマキー設定
-                float R = c.r - _Color.r;
-				float G = c.g - _Color.g;
-				float B = c.b - _Color.b;
-				float dist = sqrt(R * R + G * G + B * B);
+//                float R = c.r - _Color.r;
+//				float G = c.g - _Color.g;
+//				float B = c.b - _Color.b;
+				float dist = c.r;
 
-				if (dist <= _Threshold) {
+				if (dist <= _Threshold && i.uv.x >= 0.4 && i.uv.x <=0.6) {
 					c = fixed4(1.0,1.0,1.0,0.0);
 				}else{
 					c = camCol;
