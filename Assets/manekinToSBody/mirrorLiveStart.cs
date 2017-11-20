@@ -36,5 +36,34 @@ public class mirrorLiveStart : MonoBehaviour {
 			webcamtex.Play ();
 			playFlag = false;
 		}
-	}
+
+        //key set mirror
+        if (Input.GetKey(KeyCode.RightArrow))
+        {
+            Vector3 mirrorPos = gameObject.transform.position;
+            mirrorPos.x = mirrorPos.x + 0.01f;
+            gameObject.transform.position = mirrorPos;
+        }
+        else if (Input.GetKey(KeyCode.LeftArrow))
+        {
+            Vector3 mirrorPos = gameObject.transform.position;
+            mirrorPos.x = mirrorPos.x - 0.01f;
+            gameObject.transform.position = mirrorPos;
+
+        }
+        else if (Input.GetKey(KeyCode.UpArrow))
+        {
+            Vector3 mirrorPos = gameObject.transform.position;
+            mirrorPos.y = mirrorPos.y + 0.01f;
+            gameObject.transform.position = mirrorPos;
+
+        }
+        else if (Input.GetKey(KeyCode.DownArrow))
+        {
+            Vector3 mirrorPos = gameObject.transform.position;
+            mirrorPos.y = mirrorPos.y - 0.01f;
+            gameObject.transform.position = mirrorPos;
+
+        }
+    }
 }
