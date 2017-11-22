@@ -19,20 +19,25 @@ public class LateMovie : MonoBehaviour {
 
 	//何秒遅らせるか
 	public int lateSec = 3;
+	public float lateSpeed = 0.01f;
+
+	//遅延を減らすスイッチ
+	private bool realTime = false;
+	private int GoBack = 0;
+	private float fixTime = 0;
 
 
 	// Use this for initialization
 	void Start () {
 
 		WebCamInit ();
-		Application.targetFrameRate = fps; //60FPSに設定
+		Application.targetFrameRate = fps; //FPS設定
 
 	}
 		
 
 	// Update is called once per frame
 	void Update () {
-
 
 		//最初の一回で代入先のtextureを初期化
 		if(webcamTexture.width > 16 && webcamTexture.height > 16 && webcamIsPlaying){
@@ -42,15 +47,18 @@ public class LateMovie : MonoBehaviour {
 
 		//全て初期化されたらここに入る
 		if(webcamIsPlaying == false){
+			
+			if(Input.GetKeyDown(KeyCode.Return)){
+				realTime = true;
+				GoBack = 1 - GoBack;
+			}
 
 			textureArray.SetPixels (webcamTexture.GetPixels() , Time.frameCount % (lateSec * fps));
-			StartCoroutine ("LateTimeMovie",Time.frameCount % (fps * lateSec));
-
-//			textureArray.SetPixels (webcamTexture.GetPixels() , Time.frameCount % (lateSec * fps));
-//			setTexture.SetPixels (textureArray.GetPixels (Time.frameCount % (lateSec * fps)));
-//			setTexture.Apply ();
+			StartCoroutine ("realTimeMovie",Time.frameCount % (fps * lateSec));
 
 		}
+
+		Debug.Log (fixTime);
 
 	}
 
@@ -79,13 +87,29 @@ public class LateMovie : MonoBehaviour {
 
 		//テクスチャー配列、カラー、表示テクスチャーの初期化
 		textureArray = new Texture2DArray(webcamTexture.width, webcamTexture.height,lateSec * fps, TextureFormat.RGB565,false);
-		//textureArray = null;
 		setTexture = new Texture2D(webcamTexture.width , webcamTexture.height,TextureFormat.RGB565,false);
 		GetComponent<Renderer> ().material.mainTexture = setTexture;
 	}
 
-	IEnumerator LateTimeMovie(int i){
-		yield return  new WaitForSeconds (1);
+	IEnumerator realTimeMovie(int i){
+
+		if(realTime && GoBack == 1){
+			if (lateSec - fixTime > 0) {
+				fixTime += lateSpeed;
+			} else {
+				fixTime = lateSec;
+				realTime = false;
+			}
+		}else if (realTime && GoBack == 0){
+			if (fixTime > 0) {
+				fixTime -= lateSpeed;
+			} else {
+				fixTime = 0;
+				realTime = false;
+			}
+		}
+
+		yield return  new WaitForSeconds ((float)lateSec - fixTime);
 		setTexture.SetPixels (textureArray.GetPixels (i));
 		setTexture.Apply ();
 	}
