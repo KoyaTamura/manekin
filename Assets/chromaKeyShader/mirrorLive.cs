@@ -34,6 +34,39 @@ public class mirrorLive : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if (Input.GetKey(KeyCode.RightArrow))
+		{
+			Vector3 mirrorPos = gameObject.transform.position;
+			mirrorPos.x = mirrorPos.x + 0.02f;
+			gameObject.transform.position = mirrorPos;
+		}
+		else if (Input.GetKey(KeyCode.LeftArrow))
+		{
+			Vector3 mirrorPos = gameObject.transform.position;
+			mirrorPos.x = mirrorPos.x - 0.02f;
+			gameObject.transform.position = mirrorPos;
+
+		}
+		else if (Input.GetKey(KeyCode.UpArrow))
+		{
+			Vector3 mirrorPos = gameObject.transform.position;
+			mirrorPos.y = mirrorPos.y + 0.02f;
+			gameObject.transform.position = mirrorPos;
+
+		}
+		else if (Input.GetKey(KeyCode.DownArrow))
+		{
+			Vector3 mirrorPos = gameObject.transform.position;
+			mirrorPos.y = mirrorPos.y- 0.02f;
+			gameObject.transform.position = mirrorPos;
+
+		}else if (Input.GetKey(KeyCode.R))
+		{
+			transform.Rotate (new Vector3 (0f, 0f, 1f));
+
+		}else if (Input.GetKey(KeyCode.L))
+		{
+			transform.Rotate (new Vector3 (0f, 0f, -1f));
+		}
 	}
 }
