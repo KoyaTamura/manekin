@@ -51,12 +51,13 @@
 			{
 				fixed4 col = tex2D(_MainTex, i.uv);
 
-				float R = col.r - _Color.r;
-				float G = col.g - _Color.g;
-				float B = col.b - _Color.b;
-				float dist = sqrt(R * R + G * G + B * B);
+				float R = col.r;
+				float G = col.g;
+				float B = col.b;
+				//float dist = sqrt(R * R + G * G + B * B);
+				float Key = (R + B)/2.0 - G;
 
-				if (dist <= _Threshold) {
+				if (Key <= _Threshold) {
 					col = fixed4(1.0,1.0,1.0,0.0);
 				}
 
