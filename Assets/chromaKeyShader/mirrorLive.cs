@@ -67,6 +67,13 @@ public class mirrorLive : MonoBehaviour {
 		}else if (Input.GetKey(KeyCode.L))
 		{
 			transform.Rotate (new Vector3 (0f, 0f, -1f));
+		}else if (Input.GetKey(KeyCode.U))
+		{
+			transform.Rotate (new Vector3 (1f, 0f, 0f));
+
+		}else if (Input.GetKey(KeyCode.D))
+		{
+			transform.Rotate (new Vector3 (-1f, 0f, 0f));
 		}
 	}
 }
