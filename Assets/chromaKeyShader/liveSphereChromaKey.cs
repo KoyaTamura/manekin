@@ -30,6 +30,8 @@ public class liveSphereChromaKey : MonoBehaviour {
 			Debug.Log (devices[i].name);
 		}
 
+		//Oculusの映像をうつさないようにする設定(ライブの映像には関係ない)
+		UnityEngine.VR.VRSettings.showDeviceView = false;
 	}
 	
 	// Update is called once per frame
