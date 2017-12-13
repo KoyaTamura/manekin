@@ -24,9 +24,8 @@ public class LateMovie : MonoBehaviour {
 
 	//遅延を減らすスイッチ
 	private bool realTime = false;
-	public bool swichLate = true;
-	private int GoBack;
-	private float fixTime;
+	private int GoBack = 0;
+	private float fixTime = 0;
 
 
 
@@ -69,15 +68,6 @@ public class LateMovie : MonoBehaviour {
 	}
 
 	void WebCamInit(){
-		//遅延した状態で始めるならGoBackは0でfixTimeは0
-		//リアルタイムで始める場合はGoBackは1でfixTimeはlateSec
-		if (swichLate) {
-			GoBack = 0;
-			fixTime = 0;
-		} else {
-			GoBack = 1;
-			fixTime = lateSec;
-		}
 
 		//webcamをスタートさせる
 		WebCamDevice[] devices = WebCamTexture.devices;

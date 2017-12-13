@@ -1,4 +1,4 @@
-﻿Shader "Unlit/BlackChromaKey"
+﻿Shader "Unlit/testGray"
 {
 	Properties
 	{
@@ -61,9 +61,15 @@
                 float gray = c.r * 0.3 + c.g * 0.6 + c.b * 0.1;
                 c.rgb = fixed3(gray, gray, gray);
 
+
                 //コントラスト調整
                 c = 1/(1+exp(-_Contrast*(c-0.5)));
 
+
+                 //クロマキー設定
+//                float R = c.r - _Color.r;
+//				float G = c.g - _Color.g;
+//				float B = c.b - _Color.b;
 				float dist = c.r;
 
 				if (dist <= _Threshold && i.uv.x >= 0.4 && i.uv.x <=0.58 && i.uv.y >= 0.41 && i.uv.y <=0.61) {
