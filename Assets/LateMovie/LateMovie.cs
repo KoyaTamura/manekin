@@ -2,6 +2,7 @@
 using UnityEngine;
 //using UnityEngine.Video;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class LateMovie : MonoBehaviour {
 
@@ -28,11 +29,13 @@ public class LateMovie : MonoBehaviour {
 	private float fixTime;
 
 
+
+
 	// Use this for initialization
 	void Start () {
 
 		WebCamInit ();
-		Application.targetFrameRate = fps; //FPS設定
+		//Application.targetFrameRate = fps; //FPS設定
 
 	}
 		
@@ -55,9 +58,11 @@ public class LateMovie : MonoBehaviour {
 			}
 
 			textureArray.SetPixels (webcamTexture.GetPixels() , Time.frameCount % (lateSec * fps));
-			StartCoroutine ("realTimeMovie",Time.frameCount % (fps * lateSec));
+            //setTexture.SetPixels(textureArray.GetPixels(Time.frameCount % (lateSec * fps)));
+            //setTexture.Apply();
+            StartCoroutine ("realTimeMovie",Time.frameCount % (fps * lateSec));
 
-		}
+        }
 
 		Debug.Log (fixTime);
 
